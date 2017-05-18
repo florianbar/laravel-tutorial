@@ -16,4 +16,9 @@ class PostsController extends Controller
     {
     	return view('posts.show', compact('post'));
     }
+
+    public function store()
+    {
+    	//return view('posts.show', compact('post'));
+    }
 }
