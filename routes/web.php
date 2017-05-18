@@ -13,22 +13,30 @@
 
 use App\Task;
 
-Route::get('/tasks', function() {
-	//use query builder
-	$tasks = DB::table('tasks')->get();
-	//or use a model to fetch data from db table (Eloquent in a dedicated class)
-	$tasks = Task::all();
-	$tasks = Task::incomplete()->get();
+/* 
+ * For most routes you'd need a:
+ * - controller => PostsController
+ * - Eloquent model => Post
+ * - migration => create_posts_table
+ *
+ * Seperate commands
+ * -----------------
+ * php artisan make:controller PostsController
+ * php artisan make:model Post
+ * php artisan make:migration create_posts_table --create=posts
+ *
+ * Combined command to create all 3
+ * --------------------------------
+ * php artisan make:model Post -mc
+ */
 
-    return view('tasks.index', compact('tasks'));
-});
+Route::get('/', 'PostsController@index');
+Route::get('/posts/{post}', 'PostsController@show');
 
-// '/tasks/{task}' is called a wild card
-Route::get('/tasks/{task}', function($id) {
-	//use query builder
-	$task = DB::table('tasks')->find($id);
-	//or use a model to fetch data from db table (Eloquent in a dedicated class)
-	$task = Task::find($id);
+Route::get('/tasks', 'TasksController@index');
 
-    return view('tasks.show', compact('task'));
-});
+/* 
+ * '/tasks/{task}' is called a wild card
+ */
+Route::get('/tasks/{task}', 'TasksController@show');
+
