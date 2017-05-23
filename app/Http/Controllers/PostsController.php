@@ -17,8 +17,28 @@ class PostsController extends Controller
     	return view('posts.show', compact('post'));
     }
 
-    public function store()
+    public function create()
     {
-    	//return view('posts.show', compact('post'));
+        return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate(request(), [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        // $post = new Post;
+        // $post->title = request('title');
+        // $post->body = request('body');
+
+        // // Save it to the database
+        // $post->save();
+
+        Post::create(request(['title', 'body']));
+
+        // And then redirect to the home page
+        return redirect('/');
     }
 }

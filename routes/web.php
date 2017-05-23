@@ -28,6 +28,10 @@ use App\Task;
  * Combined command to create all 3
  * --------------------------------
  * php artisan make:model Post -mc
+ *
+ * Create a resourceful controlelr with all methods
+ * ------------------------------------------------
+ * php artisan make:controller TaskController -r
  */
 
 /*
@@ -43,7 +47,8 @@ use App\Task;
  */
 
 Route::get('/', 'PostsController@index');
-Route::get('/posts/{post}', 'PostsController@show');
+Route::get('/posts/create', 'PostsController@create');
+//Route::get('/posts/{post}', 'PostsController@show');
 Route::post('/posts', 'PostsController@store');
 
 Route::get('/tasks', 'TasksController@index');

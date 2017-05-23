@@ -1,5 +1,5 @@
 @extends('layout')
 
 @section('content')
-	dsadsa
+	<h1>Posts</h1>
 @endsection
